@@ -3,6 +3,66 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome to my Sandbox</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@{
+    var message = "Hello Razor!!!";
+
+    int count = 5;
+
+    // bool isTrue = false;
+
+    // create a names List<> and initialize.
+    var names = new List<string>();
+    names.Add("Mike");
+    names.Add("Joe");
+    names.Add("Jim");
+
+    List<string> pokeList = new List<string> {
+        "Professor Oak",
+        "Lorelei",
+        "Flannery",
+        "Falkner",
+        "Volkner",
+        "Gardenia",
+        "Burgh",
+        "Agatha",
+        "Roxanne",
+        "Professor Juniper"
+    };
+}
+
+<h2 class="text-center">
+    @message
+</h2>
+
+<hr />
+
+<div class="text-center">
+    @if (count > 20)
+    {
+        <p>Count is greater than twenty. Value is @count.</p>
+    }
+    else
+    {
+        <p>Count is less than twenty. Value is @count.</p>
+    }
+</div>
+
+<hr />
+
+<div>
+    <h2>Poke Characters</h2>
+
+    <ul>
+        @foreach(string poke in pokeList)
+        {            
+          <li>              
+              @poke
+          </li>  
+        }
+    </ul>
+</div>
+
