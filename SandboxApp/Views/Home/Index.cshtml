@@ -26,11 +26,12 @@
         "Flannery",
         "Falkner",
         "Volkner",
+        "Pikachu",
         "Gardenia",
         "Burgh",
         "Agatha",
         "Roxanne",
-        "Professor Juniper"
+        "Professor Juniper"        
     };
 }
 
@@ -55,13 +56,26 @@
 
 <div>
     <h2>Poke Characters</h2>
-
     <ul>
         @foreach(string poke in pokeList)
-        {            
-          <li>              
-              @poke
-          </li>  
+        {      
+            @* <li class="@(poke == "Pikachu" ? "fw-bold" : "")">
+                @poke
+            </li> *@
+
+            @if(poke == "Pikachu")
+            {
+                <li class="fw-bold">
+                    @poke<br />
+                    <img src="/images/pikachu.png" alt="@poke" class="thumbnail" />
+                </li>
+            }
+            else
+            {
+                <li>
+                    @poke
+                </li>
+            }             
         }
     </ul>
 </div>
