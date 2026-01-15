@@ -1,0 +1,22 @@
+﻿@model List<SandboxApp.Models.Photo>
+
+<h1>
+    My collection of photos
+</h1>
+
+<table border="1">
+@foreach(var item in @Model)
+{
+    <tr>
+        <td>
+                @item.Id
+        </td>
+        <td>
+                @item.Title
+        </td>
+        <td>
+                @item.Description
+        </td>
+    </tr>
+}
+</table>
