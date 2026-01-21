@@ -1,0 +1,29 @@
+﻿<h1>
+    Contact Form
+</h1>
+
+@if(ViewData["Message"] != null)
+{
+    <p>
+        @ViewData["Message"]
+    </p>
+}
+else
+{
+    <form method="post" class="w-25">
+        <div class="mb-3">
+            <label for="FirstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" name="FirstName" id="FirstName" />
+        </div>
+
+        <div class="mb-3">
+            <label for="LastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" name="LastName" id="LastName" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+}
+
+
+

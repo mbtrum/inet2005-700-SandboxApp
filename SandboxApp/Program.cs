@@ -1,4 +1,11 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SandboxApp.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Entity Framework for SQL Server
+builder.Services.AddDbContext<SandboxAppContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SandboxAppContext") ?? throw new InvalidOperationException("Connection string 'SandboxAppContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
