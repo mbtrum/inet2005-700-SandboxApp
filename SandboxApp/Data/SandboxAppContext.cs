@@ -15,5 +15,6 @@ namespace SandboxApp.Data
         }
 
         public DbSet<SandboxApp.Models.Photo> Photo { get; set; } = default!;
+        public DbSet<SandboxApp.Models.Person> Person { get; set; } = default!;
     }
 }
