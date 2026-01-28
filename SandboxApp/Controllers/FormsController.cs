@@ -48,7 +48,7 @@ namespace SandboxApp.Controllers
         //
 
         [HttpPost]
-        public IActionResult ContactForm([Bind("FirstName,LastName")] Person person) // Bind[] hels prevent overposting attacks
+        public IActionResult ContactForm([Bind("FirstName,LastName")] Person person) // Bind[] helps prevent overposting attacks
         {
             string message = $"Welcome to my web app {person.FirstName} {person.LastName}!";
 

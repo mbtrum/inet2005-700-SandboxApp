@@ -14,38 +14,57 @@ namespace SandboxApp.Controllers
     {
         private readonly SandboxAppContext _context;
 
+        // Constructor
+        // Dependency injection to pass context into this class.
         public PhotosController(SandboxAppContext context)
         {
+            // Initialize context in the constructor
             _context = context;
         }
 
         // GET: Photos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Photo.ToListAsync());
+            // Get a list of all photos
+            List<Photo> photos = await _context.Photo.ToListAsync();
+
+            // Pass gthe list into the view
+            return View(photos);
         }
+
+        // Synchronous version of Index()
+        //public IActionResult Index()
+        //{
+        //    var photos = _context.Photo.ToList();
+        //    return View(photos);
+        //}
 
         // GET: Photos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            // check if id is missing in URL
             if (id == null)
             {
-                return NotFound();
+                return NotFound(); // http 404
             }
 
-            var photo = await _context.Photo
-                .FirstOrDefaultAsync(m => m.Id == id);
+            // Find a photo with m.Id == id
+            var photo = await _context.Photo.FirstOrDefaultAsync(m => m.Id == id);
+
+            // record not found in database
             if (photo == null)
             {
-                return NotFound();
+                return NotFound(); // http 404
             }
 
+            // Pass the photo into the view
             return View(photo);
         }
 
         // GET: Photos/Create
         public IActionResult Create()
         {
+            // return empty form to add new photo
             return View();
         }
 
@@ -54,14 +73,25 @@ namespace SandboxApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,ImageFilename,CreatedDate")] Photo photo)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,ImageFilename")] Photo photo) // removed CreatedDate from binding
         {
+            // Set the created date
+            photo.CreatedDate = DateTime.Now;
+
+            // Entity Framework data validation
             if (ModelState.IsValid)
             {
+                // Add photo object to context
                 _context.Add(photo);
+
+                // Save the context changes to database
                 await _context.SaveChangesAsync();
+
+                // Redirect to Index action
                 return RedirectToAction(nameof(Index));
             }
+
+            // Pass the photo to the view
             return View(photo);
         }
 
